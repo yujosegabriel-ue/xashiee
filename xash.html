@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Note For Xash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #1e3a8a;
+            overflow-x: hidden;
+        }
+        .letter-content {
+            font-family: 'Montserrat', sans-serif;
+            transition: all 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .letter-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stationery-border {
+            border: 1px solid #dbeafe;
+            background-color: #ffffff;
+        }
+        /* Fixed Polaroid Styling */
+        .media-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 3rem auto;
+            background-color: #fdfdfd; 
+            border: 1px solid #eaeef2;
+            padding: 14px 14px 45px 14px; 
+            border-radius: 1px;
+            box-shadow: 0 12px 35px rgba(30, 58, 138, 0.1);
+            transform: rotate(-1.5deg);
+            transition: transform 0.6s ease;
+        }
+        .media-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .polaroid-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border: 1px solid #e2e8f0;
+        }
+        .ps-section {
+            display: none;
+            border-top: 1px dashed #dbeafe;
+            padding-top: 2.5rem;
+            margin-top: 2.5rem;
+            animation: fadeIn 1s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .bar { width: 2px; height: 8px; background: #60a5fa; animation: bounce 0.8s infinite alternate; }
+        @keyframes bounce { from { height: 3px; } to { height: 16px; } }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6">
+
+    <audio id="bg-music" loop>
+        <source src="Bruno Mars - Risk It All.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="envelope-container" class="max-w-xl w-full">
+        
+        <div id="closed-state" class="text-center">
+            <div class="mb-8 opacity-40">
+                <p class="text-[10px] tracking-[0.4em] uppercase text-blue-900">PST! may sasabihin ako sayo!</p>
+            </div>
+            <button onclick="openLetter()" class="relative px-12 py-6 stationery-border shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-700">
+                <span class="text-xs uppercase tracking-[0.3em] font-medium text-blue-700">Open Me</span>
+                <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center shadow-md">
+                    <span class="text-white text-[10px]">✦</span>
+                </div>
+            </button>
+        </div>
+
+        <div id="open-state" class="hidden text-left bg-white p-8 md:p-16 stationery-border shadow-2xl relative overflow-hidden">
+            
+            <div class="absolute top-8 right-8 flex items-end gap-1 h-4">
+                <div class="bar" style="animation-delay: 0.1s"></div>
+                <div class="bar" style="animation-delay: 0.3s"></div>
+                <div class="bar" style="animation-delay: 0.2s"></div>
+                <span class="text-[8px] uppercase tracking-widest ml-2 text-blue-300 font-mono">Audio: Risk It All</span>
+            </div>
+
+            <div class="letter-content" id="main-text">
+                
+                <div class="media-container">
+                    <img src="tom-the-lizard.jpg" alt="Support" class="polaroid-image">
+                    <p class="text-center mt-4 text-[9px] text-blue-200 tracking-widest font-mono">ITS_FINALS_WEEK</p>
+                </div>
+
+                <header class="mb-12">
+                    <div class="flex justify-between items-baseline mb-8 border-b border-blue-50 pb-4">
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-blue-200 font-mono italic">FUTURE ATTY.</span>
+                        <span class="text-[9px] uppercase tracking-[0.4em] text-blue-200 font-mono">April 19, 2026</span>
+                    </div>
+                    <h1 class="text-3xl font-light tracking-tight text-blue-950 italic">Hey Xash,</h1>
+                </header>
+
+                <div class="space-y-8 text-blue-900 font-light leading-relaxed family-montserrat text-md">
+                    <p>
+                        Hey… I just wanted to check in on you for a bit. I know things have probably been really busy and a little overwhelming lately, so I hope you’re taking moments to breathe and take care of yourself too.
+
+                    <p>
+                        Seeing how much of yourself you’ve been pouring into your studies lately honestly makes me admire you even more. I know finals week can feel overwhelming, like everything is piling up at once, but your effort and dedication never go unnoticed.
+                    </p>
+
+                    <p>
+                        You have this incredible way of staying focused even when the pressure is high. It’s honestly one of the things I admire most about you. Just remember that while these exams matter, they don’t define how brilliant you are you’ve already proven that a thousand times over.
+                    </p>
+
+                    <p>
+                        Tackle it one paper at a time. Take breaks, breathe, and trust your instincts pag di mo alam yung sagot, letter c yan hehe. But kidding aside, You’re more prepared than you realize, and you’re definitely stronger than any stress this week tries to throw at you.
+                    </p>
+                    
+                    <p>
+                        I’m rooting for you every step of the way. I'm proud of you!.
+                    </p>
+                </div>
+
+                <div class="mt-20 pt-10 border-t border-blue-50 flex justify-between items-end">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.4em] text-blue-300 mb-1">always in your corner,</p>
+                        <p class="text-2xl font-light tracking-tighter text-blue-950">Gab</p>
+                    </div>
+                    <button id="ps-trigger" onclick="revealPS()" class="text-[10px] uppercase tracking-[0.3em] px-4 py-2 border border-blue-100 text-blue-400 hover:bg-blue-50 transition-all rounded">
+                        press me!
+                    </button>
+                </div>
+
+                <div id="ps-content" class="ps-section">
+                    <p class="text-blue-950 italic font-light mb-8">
+                        P.S. Now that finals are almost over... I was wondering if you'd want to go out this Thursday? To celebrate (or just decompress). No pressure at all.
+                    </p>
+                    
+                    <form id="response-form" action="https://formspree.io/f/maqajlvy" method="POST" class="flex flex-wrap gap-4">
+                        <button type="submit" onclick="submitResponse(event, 'Yes!')" 
+                            class="px-8 py-3 bg-blue-600 text-white text-[10px] uppercase tracking-[0.2em] rounded-sm hover:bg-blue-700 transition-all shadow-sm">
+                            Yes, let's do it
+                        </button>
+                        
+                        <button type="submit" onclick="submitResponse(event, 'Maybe later?')" 
+                            class="px-8 py-3 border border-blue-200 text-blue-800 text-[10px] uppercase tracking-[0.2em] rounded-sm hover:bg-blue-50 transition-all">
+                            Maybe another time
+                        </button>
+                    </form>
+
+                    <p id="success-message" class="hidden mt-6 text-[10px] text-blue-400 uppercase tracking-[0.3em] italic animate-pulse">
+                        Response transmitted to Gabriel ✦
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLetter() {
+            const closed = document.getElementById('closed-state');
+            const opened = document.getElementById('open-state');
+            const content = document.getElementById('main-text');
+            const audio = document.getElementById('bg-music');
+
+            audio.play().catch(e => console.log("Audio blocked."));
+
+            closed.classList.add('opacity-0', 'transition-all', 'duration-700');
+            
+            setTimeout(() => {
+                closed.classList.add('hidden');
+                opened.classList.remove('hidden');
+                setTimeout(() => {
+                    opened.style.opacity = "1";
+                    content.classList.add('letter-active');
+                }, 150);
+            }, 600);
+        }
+
+        function revealPS() {
+            document.getElementById('ps-trigger').style.display = 'none';
+            document.getElementById('ps-content').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        async function submitResponse(event, choice) {
+            event.preventDefault();
+            const form = document.getElementById('response-form');
+            const successMsg = document.getElementById('success-message');
+            
+            const formData = new FormData();
+            formData.append('Selection', choice);
+            formData.append('Message', 'Thursday Invite Response');
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+                } else {
+                    alert("Submission error. Just text me instead!");
+                }
+            } catch (error) {
+                alert("Connection error. Just text me!");
+            }
+        }
+    </script>
+</body>
+</html>
