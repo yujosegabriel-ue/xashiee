@@ -3,220 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Note For Xash</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
+    <title>For Xiao Xash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:italic,wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-purple: #9d8df1;
+            --deep-blue: #4a90e2;
+            --soft-blue: #b8c1ec;
+            --sky-light: #e0f2fe;
+            --dark-text: #232946;
+            --glass: rgba(255, 255, 255, 0.75);
+        }
+
         body {
-            background-color: #f4f7fa;
-            font-family: 'Space Grotesk', sans-serif;
-            color: #1e3a8a;
+            /* Mixed Purple and Blue Gradient */
+            background: linear-gradient(135deg, #f0f7ff 0%, #f5f3ff 50%, #e0e7ff 100%);
+            color: var(--dark-text);
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             overflow-x: hidden;
         }
-        .letter-content {
-            font-family: 'Montserrat', sans-serif;
-            transition: all 1.2s cubic-bezier(0.2, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(20px);
+
+        /* Floating Color Orbs */
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.4;
         }
-        .letter-active {
+        .c1 { width: 400px; height: 400px; background: var(--primary-purple); top: -100px; right: -50px; }
+        .c2 { width: 350px; height: 350px; background: var(--deep-blue); bottom: -100px; left: -50px; }
+        .c3 { width: 200px; height: 200px; background: var(--soft-blue); top: 40%; left: 10%; }
+
+        #gatekeeper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        .open-btn {
+            background: linear-gradient(45deg, var(--deep-blue), var(--primary-purple));
+            border: none;
+            color: white;
+            padding: 18px 45px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(157, 141, 241, 0.4);
+        }
+
+        .container {
+            max-width: 650px;
+            width: 90%;
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .container.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .stationery-border {
-            border: 1px solid #dbeafe;
-            background-color: #ffffff;
+
+        .polaroid-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
         }
-        /* Fixed Polaroid Styling */
-        .media-container {
-            width: 100%;
-            max-width: 320px;
-            margin: 0 auto 3rem auto;
-            background-color: #fdfdfd; 
-            border: 1px solid #eaeef2;
-            padding: 14px 14px 45px 14px; 
-            border-radius: 1px;
-            box-shadow: 0 12px 35px rgba(30, 58, 138, 0.1);
-            transform: rotate(-1.5deg);
+
+        /* Blue Washi Tape */
+        .tape {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            width: 110px;
+            height: 35px;
+            background: rgba(74, 144, 226, 0.5);
+            backdrop-filter: blur(2px);
+            border-left: 2px dashed rgba(255,255,255,0.4);
+            border-right: 2px dashed rgba(255,255,255,0.4);
+            z-index: 2;
+        }
+
+        .polaroid-frame {
+            background: white;
+            padding: 12px 12px 55px 12px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.07);
+            border-radius: 3px;
+            transform: rotate(-2deg);
             transition: transform 0.6s ease;
         }
-        .media-container:hover {
-            transform: rotate(0deg) scale(1.02);
+
+        .polaroid-frame:hover {
+            transform: rotate(1deg) scale(1.03);
         }
-        .polaroid-image {
-            width: 100%;
-            aspect-ratio: 1 / 1;
+
+        .polaroid-frame img {
+            width: 310px;
+            height: 310px;
             object-fit: cover;
-            border: 1px solid #e2e8f0;
+            display: block;
+            border-radius: 2px;
         }
-        .ps-section {
-            display: none;
-            border-top: 1px dashed #dbeafe;
-            padding-top: 2.5rem;
-            margin-top: 2.5rem;
-            animation: fadeIn 1s ease forwards;
+
+        .letter-content {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            padding: 45px;
+            border-radius: 35px;
+            text-align: left;
+            line-height: 1.9;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 25px 50px rgba(74, 144, 226, 0.1);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            background: linear-gradient(45deg, var(--deep-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            font-style: italic;
         }
-        .bar { width: 2px; height: 8px; background: #60a5fa; animation: bounce 0.8s infinite alternate; }
-        @keyframes bounce { from { height: 3px; } to { height: 16px; } }
+
+        .main-text {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.05rem;
+            color: var(--dark-text);
+            white-space: pre-line;
+        }
+
+        /* Two-tone highlights */
+        .highlight {
+            color: var(--deep-blue);
+            font-weight: 600;
+            border-bottom: 2px solid var(--soft-blue);
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-top: 35px;
+            text-align: right;
+            color: var(--primary-purple);
+            text-shadow: 1px 1px 0px white;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
+<body>
+
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
 
     <audio id="bg-music" loop>
-        <source src="Bruno Mars - Risk It All.mp3" type="audio/mpeg">
+        <source src="TWICE CHEER UP MV.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="envelope-container" class="max-w-xl w-full">
-        
-        <div id="closed-state" class="text-center">
-            <div class="mb-8 opacity-40">
-                <p class="text-[10px] tracking-[0.4em] uppercase text-blue-900">PST! may sasabihin ako sayo!</p>
+    <div id="gatekeeper">
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 25px; color: var(--deep-blue); letter-spacing: 1px;">A message for you...</h2>
+        <button class="open-btn" onclick="openLetter()">Open Me ✧</button>
+    </div>
+
+    <div class="container" id="main-content">
+        <div class="polaroid-wrapper">
+            <div class="tape"></div>
+            <div class="polaroid-frame">
+                <img src="xash.jpeg" alt="Xash">
             </div>
-            <button onclick="openLetter()" class="relative px-12 py-6 stationery-border shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-700">
-                <span class="text-xs uppercase tracking-[0.3em] font-medium text-blue-700">Open Me</span>
-                <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center shadow-md">
-                    <span class="text-white text-[10px]">✦</span>
-                </div>
-            </button>
         </div>
 
-        <div id="open-state" class="hidden text-left bg-white p-8 md:p-16 stationery-border shadow-2xl relative overflow-hidden">
-            
-            <div class="absolute top-8 right-8 flex items-end gap-1 h-4">
-                <div class="bar" style="animation-delay: 0.1s"></div>
-                <div class="bar" style="animation-delay: 0.3s"></div>
-                <div class="bar" style="animation-delay: 0.2s"></div>
-                <span class="text-[8px] uppercase tracking-widest ml-2 text-blue-300 font-mono">Audio: Risk It All</span>
-            </div>
-
-            <div class="letter-content" id="main-text">
+        <div class="letter-content">
+            <h1>Dear Xiao Xash,</h1>
+            <div class="main-text">
+                I just wanted to tell you how proud I am of you for finally finishing finals week. I know how exhausting and stressful everything has been, but you still managed to get through it with so much strength and grace. You’ve been carrying so much these past few weeks, and seeing you push through every challenge only made me admire you more.
                 
-                <div class="media-container">
-                    <img src="tom-the-lizard.jpg" alt="Support" class="polaroid-image">
-                    <p class="text-center mt-4 text-[9px] text-blue-200 tracking-widest font-mono">ITS_FINALS_WEEK</p>
-                </div>
-
-                <header class="mb-12">
-                    <div class="flex justify-between items-baseline mb-8 border-b border-blue-50 pb-4">
-                        <span class="text-[9px] uppercase tracking-[0.4em] text-blue-200 font-mono italic">FUTURE ATTY.</span>
-                        <span class="text-[9px] uppercase tracking-[0.4em] text-blue-200 font-mono">April 19, 2026</span>
-                    </div>
-                    <h1 class="text-3xl font-light tracking-tight text-blue-950 italic">Hey Xash,</h1>
-                </header>
-
-                <div class="space-y-8 text-blue-900 font-light leading-relaxed family-montserrat text-md">
-                    <p>
-                        Hey… I just wanted to check in on you for a bit. I know things have probably been really busy and a little overwhelming lately, so I hope you’re taking moments to breathe and take care of yourself too.
-
-                    <p>
-                        Seeing how much of yourself you’ve been pouring into your studies lately honestly makes me admire you even more. I know finals week can feel overwhelming, like everything is piling up at once, but your effort and dedication never go unnoticed.
-                    </p>
-
-                    <p>
-                        You have this incredible way of staying focused even when the pressure is high. It’s honestly one of the things I admire most about you. Just remember that while these exams matter, they don’t define how brilliant you are you’ve already proven that a thousand times over.
-                    </p>
-
-                    <p>
-                        Tackle it one paper at a time. Take breaks, breathe, and trust your instincts pag di mo alam yung sagot, letter c yan hehe. But kidding aside, You’re more prepared than you realize, and you’re definitely stronger than any stress this week tries to throw at you.
-                    </p>
-                    
-                    <p>
-                        I’m rooting for you every step of the way. I'm proud of you!.
-                    </p>
-                </div>
-
-                <div class="mt-20 pt-10 border-t border-blue-50 flex justify-between items-end">
-                    <div>
-                        <p class="text-[10px] uppercase tracking-[0.4em] text-blue-300 mb-1">always in your corner,</p>
-                        <p class="text-2xl font-light tracking-tighter text-blue-950">Gab</p>
-                    </div>
-                    <button id="ps-trigger" onclick="revealPS()" class="text-[10px] uppercase tracking-[0.3em] px-4 py-2 border border-blue-100 text-blue-400 hover:bg-blue-50 transition-all rounded">
-                        press me!
-                    </button>
-                </div>
-
-                <div id="ps-content" class="ps-section">
-                    <p class="text-blue-950 italic font-light mb-8">
-                        P.S. Now that finals are almost over... I was wondering if you'd want to go out this Thursday? To celebrate (or just decompress). No pressure at all.
-                    </p>
-                    
-                    <form id="response-form" action="https://formspree.io/f/maqajlvy" method="POST" class="flex flex-wrap gap-4">
-                        <button type="submit" onclick="submitResponse(event, 'Yes!')" 
-                            class="px-8 py-3 bg-blue-600 text-white text-[10px] uppercase tracking-[0.2em] rounded-sm hover:bg-blue-700 transition-all shadow-sm">
-                            Yes, let's do it
-                        </button>
-                        
-                        <button type="submit" onclick="submitResponse(event, 'Maybe later?')" 
-                            class="px-8 py-3 border border-blue-200 text-blue-800 text-[10px] uppercase tracking-[0.2em] rounded-sm hover:bg-blue-50 transition-all">
-                            Maybe another time
-                        </button>
-                    </form>
-
-                    <p id="success-message" class="hidden mt-6 text-[10px] text-blue-400 uppercase tracking-[0.3em] italic animate-pulse">
-                        Response transmitted to Gabriel ✦
-                    </p>
-                </div>
+                All those sleepless nights, long study sessions, and moments when you felt tired but still kept going—they all meant something. Every sacrifice you made, every effort you gave, all of it led you here. Your hard work paid off, and you deserve every bit of relief and happiness that comes with finishing.
+                
+                More than that, I hope you know how amazing you are. Not just because you’re smart, but because of the heart you put into everything you do. You work so hard, and even when things get heavy, you never stop trying. That’s one of the many things that make you so special.
+                
+                Now that finals week is over, I hope you let yourself rest and enjoy the peace you’ve earned. Take a break, smile a little more, and be proud of yourself—because I definitely am.
+                
+                Seeing you overcome this makes my heart so happy. You deserve all the good things coming your way, and I hope today you feel how <span class="highlight">loved, appreciated, and admired</span> you truly are.
+                
+                Congratulations, Future Atty. Flores. You did so well, and I’m so proud of you always. Cheer Up Baby!
             </div>
+            
+            <div class="signature">— Gabo</div>
         </div>
     </div>
 
     <script>
         function openLetter() {
-            const closed = document.getElementById('closed-state');
-            const opened = document.getElementById('open-state');
-            const content = document.getElementById('main-text');
-            const audio = document.getElementById('bg-music');
+            var music = document.getElementById('bg-music');
+            music.play();
 
-            audio.play().catch(e => console.log("Audio blocked."));
-
-            closed.classList.add('opacity-0', 'transition-all', 'duration-700');
-            
+            document.getElementById('gatekeeper').style.opacity = '0';
             setTimeout(() => {
-                closed.classList.add('hidden');
-                opened.classList.remove('hidden');
-                setTimeout(() => {
-                    opened.style.opacity = "1";
-                    content.classList.add('letter-active');
-                }, 150);
-            }, 600);
-        }
-
-        function revealPS() {
-            document.getElementById('ps-trigger').style.display = 'none';
-            document.getElementById('ps-content').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-
-        async function submitResponse(event, choice) {
-            event.preventDefault();
-            const form = document.getElementById('response-form');
-            const successMsg = document.getElementById('success-message');
-            
-            const formData = new FormData();
-            formData.append('Selection', choice);
-            formData.append('Message', 'Thursday Invite Response');
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    form.classList.add('hidden');
-                    successMsg.classList.remove('hidden');
-                } else {
-                    alert("Submission error. Just text me instead!");
-                }
-            } catch (error) {
-                alert("Connection error. Just text me!");
-            }
+                document.getElementById('gatekeeper').style.visibility = 'hidden';
+                document.getElementById('main-content').classList.add('visible');
+            }, 1000);
         }
     </script>
+
 </body>
 </html>
